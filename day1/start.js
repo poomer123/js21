@@ -21,7 +21,21 @@
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    function drawSnowBalls(canvasContext, snowBall) {
+        // เริ่มใช้ canvasContext เพื่อเริ่มวาด
+        canvasContext.beginPath();
+
+        // สร้างรูปวงกลม
+        // params พิกัด x, พิกัด y, ความใหญ่ของวงกลม, องศาเริ่ม, องศาจบ (2 pi เป็นวงกลมพอดี)
+        canvasContext.arc(snowBall.x, snowBall.y, 4, 0, Math.PI * 2);
+
+        // set color
+        canvasContext.fillStyle = `rgb(255, 255, 255, 0.5)`;
+        canvasContext.fill();
+    }
+
     function createSnowBalls(canvas, numberOfSnowBalls) {
+        // สร้าง Array ตามจำนวน numberOfSnowBalls
         const coordinates = [...Array(numberOfSnowBalls)].map(() => {
             return {
                 x: random(0, canvas.width),
@@ -33,7 +47,8 @@
 
     function run() {
         const { canvas, canvasContext, numberOfSnowBalls } = setup();
-        createSnowBalls(canvas, numberOfSnowBalls);
+        const snowBalls = createSnowBalls(canvas, numberOfSnowBalls);
+        drawSnowBalls(canvasContext, snowBalls[0]);
     }
     run();
 })();
