@@ -27,10 +27,10 @@
 
         // สร้างรูปวงกลม
         // params พิกัด x, พิกัด y, ความใหญ่ของวงกลม, องศาเริ่ม, องศาจบ (2 pi เป็นวงกลมพอดี)
-        canvasContext.arc(snowBall.x, snowBall.y, 4, 0, Math.PI * 2);
+        canvasContext.arc(snowBall.x, snowBall.y, snowBall.radius, 0, Math.PI * 2);
 
         // set color
-        canvasContext.fillStyle = `rgb(255, 255, 255, 0.5)`;
+        canvasContext.fillStyle = `rgb(255, 255, 255, ${snowBall.opacity})`;
         canvasContext.fill();
     }
 
@@ -39,7 +39,9 @@
         const coordinates = [...Array(numberOfSnowBalls)].map(() => {
             return {
                 x: random(0, canvas.width),
-                y: random(0, canvas.height)
+                y: random(0, canvas.height),
+                radius: random(2, 4),
+                opacity: random(0.4, 0.9)
             }
         });
         return coordinates;
@@ -48,7 +50,9 @@
     function run() {
         const { canvas, canvasContext, numberOfSnowBalls } = setup();
         const snowBalls = createSnowBalls(canvas, numberOfSnowBalls);
-        drawSnowBalls(canvasContext, snowBalls[0]);
+        snowBalls.forEach((snowBall) => {
+            drawSnowBalls(canvasContext, snowBall);
+        });
     }
     run();
 })();
