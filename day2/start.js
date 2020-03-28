@@ -40,6 +40,7 @@
 
 	function run() {
 		countDown()
+		setInterval(countDown, secound)
 	}
 	run()
 })()
