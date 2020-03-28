@@ -11,17 +11,39 @@
 	// simulateAsyncAPI('c', 100)
 
 	// 2. Callback
-	function simulateAsyncAPI(text, timeout, callback) {
-		setTimeout(() => {
-			console.log(text)
-			callback()
-		}, timeout)
-	}
-	simulateAsyncAPI('a', 1000, () => {
-		simulateAsyncAPI('b', 500, () => {
-			simulateAsyncAPI('c', 100, () => {})
-		})
-	})
+	// function simulateAsyncAPI(text, timeout, callback) {
+	// 	setTimeout(() => {
+	// 		console.log(text)
+	// 		callback()
+	// 	}, timeout)
+	// }
+	// simulateAsyncAPI('a', 1000, () => {
+	// 	simulateAsyncAPI('b', 500, () => {
+	// 		simulateAsyncAPI('c', 100, () => {})
+	// 	})
+	// })
+
 	// 3. Promise
+	function simulateAsyncAPI(text, timeout) {
+		return new Promise((resolve, reject) => {
+			setTimeout(() => {
+				if (text === 'b') {
+					return reject('b got rejected')
+				}
+				console.log(text)
+				resolve()
+			}, timeout)
+		})
+	}
+	simulateAsyncAPI('a', 1000)
+		.then(() => {
+			return simulateAsyncAPI('b', 500)
+		})
+		.then(() => {
+			return simulateAsyncAPI('c', 100)
+		})
+		.catch(error => {
+			console.log(error)
+		})
 	// 4. Async/Await
 })()
