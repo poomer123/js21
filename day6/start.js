@@ -61,13 +61,32 @@
 		)
 	}
 
+	function shootDuck(event) {
+		const duckElem = event.target
+		duckElem.style.transition = `top ${random(1, 2)}s`
+		// ให้เลื่อนลงจากตำแหน่งปัจจุบันไปถึงล่างสุดของจอ
+		duckElem.style.top = `${window.innerHeight}px`
+
+		clearInterval(duckElem.interval)
+		setTimeout(() => {
+			document.body.removeChild(duckElem)
+			// ดึงเป็ดที่มีอยู่
+			const duck = document.querySelector('.duck')
+			if (!duck) {
+				const winningElem = document.querySelector('.winning')
+				winningElem.style.opacity = 1
+			}
+		}, 2000)
+	}
+
 	function run() {
 		const ducks = createDucks()
 		const duckElems = ducks.map(setupDuckElement)
 		duckElems.forEach(({ duck, duckElement }) => {
-			setInterval(() => {
+			duckElement.interval = setInterval(() => {
 				moveDuck(duck, duckElement)
 			}, 100)
+			duckElement.addEventListener('click', shootDuck)
 		})
 	}
 	run()
