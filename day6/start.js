@@ -37,6 +37,20 @@
 
 	function moveDuck(duck, duckElement) {
 		const { left, top } = duckElement.getBoundingClientRect()
+
+		// check ว่าเป็ดหยุดออกจากจอหรือไม่
+		const outOfBoundX = duck.x < 0 || duck.x > window.innerWidth
+		const outOfBoundY = duck.y < 0 || duck.y > window.innerHeight
+
+		if (outOfBoundX) {
+			// กลับทิศทางของ speedX
+			duck.speedX *= -1
+		}
+		if (outOfBoundY) {
+			// กลับทิศทางของ speedX
+			duck.speedY *= -1
+		}
+
 		duck.x = left + duck.speedX
 		duck.y = top - duck.speedY
 		duckElement.style.left = `${duck.x}px`
