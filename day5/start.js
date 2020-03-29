@@ -28,10 +28,18 @@
 		// สั่งให้เริ่มวาดเส้นและจบการวาด
 		context.stroke()
 		context.closePath()
+
+		previousPoint = currentPoint
+	}
+
+	function onMounseEnter({ pageX, pageY }) {
+		previousPoint.x = pageX
+		previousPoint.y = pageY
 	}
 
 	function run() {
 		canvas.addEventListener('mousemove', onMounseMove)
+		canvas.addEventListener('mouseenter', onMounseEnter)
 	}
 	run()
 })()
