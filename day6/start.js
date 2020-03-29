@@ -7,7 +7,7 @@
 		return [...Array(5)].map(() => {
 			return {
 				x: random(0, window.innerWidth),
-				y: window.innerWidth,
+				y: window.innerHeight,
 				speedX: random(-50, 50),
 				speedY: random(5, 10)
 			}
@@ -28,12 +28,23 @@
 		return { duck, duckElement }
 	}
 
-	function moveDuck(duckElement, duck) {
+	function getDuckBackgroundImage(duck, duckElement) {
+		const direction = duck.speedX > 0 ? 'right' : 'left'
+		return duckElement.style.backgroundImage.indexOf('1') !== -1
+			? `url(./${direction}-2.png)`
+			: `url(./${direction}-1.png)`
+	}
+
+	function moveDuck(duck, duckElement) {
 		const { left, top } = duckElement.getBoundingClientRect()
 		duck.x = left + duck.speedX
-		duck.y = top + duck.speedY
+		duck.y = top - duck.speedY
 		duckElement.style.left = `${duck.x}px`
 		duckElement.style.top = `${duck.y}px`
+		duckElement.style.backgroundImage = getDuckBackgroundImage(
+			duck,
+			duckElement
+		)
 	}
 
 	function run() {
@@ -41,7 +52,7 @@
 		const duckElems = ducks.map(setupDuckElement)
 		duckElems.forEach(({ duck, duckElement }) => {
 			setInterval(() => {
-				moveDuck(duckElement, duck)
+				moveDuck(duck, duckElement)
 			}, 100)
 		})
 	}
