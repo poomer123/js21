@@ -1,7 +1,7 @@
 ;(() => {
 	// day 1
 	function setup() {
-		const canvas = document.getElementById('falling-snow')
+		const canvas = document.getElementById('falling-snow-canvas')
 		canvas.width = window.innerWidth
 		canvas.height = window.innerHeight
 
