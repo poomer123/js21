@@ -1,11 +1,12 @@
 ;(() => {
-	let draggingElem
+	let draggingElem = null
 	function onDragStart() {
 		draggingElem = this
 	}
 
-	function onDrop(params) {
-		console.log(params)
+	function onDrop() {
+		this.append(draggingElem)
+		draggingElem = null
 	}
 
 	function onDragOver(event) {
