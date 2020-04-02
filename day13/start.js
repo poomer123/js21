@@ -30,5 +30,19 @@
 	console.log(true + true)
 
 	// 3. Interpreter & Compiler
+	function getPerson() {
+		// auto ; for return
+		return
+		{
+			name: 'POOM'
+		}
+	}
+	console.log(getPerson())
+
 	// 4. Checking Object Type
+	const person = {}
+	// null is object
+	if (typeof person === 'object' && person !== null) {
+		console.log('Yes, object')
+	}
 })()
