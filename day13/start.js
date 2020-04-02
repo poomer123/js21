@@ -14,6 +14,21 @@
 	}
 
 	// 2. Type Coercion
+	if (1 < 2 < 3) {
+		console.log('Inside <')
+	}
+
+	// ( 3 > 2 ) = true
+	// then true != 1
+	if (3 > 2 > 1) {
+		console.log('Inside >')
+	}
+
+	// string type to number type
+	console.log(2 - '1')
+	console.log(2 + '1')
+	console.log(true + true)
+
 	// 3. Interpreter & Compiler
 	// 4. Checking Object Type
 })()
