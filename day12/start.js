@@ -41,6 +41,25 @@
 		windElem.innerText = `Wind: ${wind} m/s`
 	}
 
+	function setAirQualityColor(aqi) {
+		if (aqi <= 50) {
+			document.documentElement.style.setProperty(
+				'--current-aqi-color',
+				'var(--good-aqi-color)'
+			)
+		} else if (aqi <= 100) {
+			document.documentElement.style.setProperty(
+				'--current-aqi-color',
+				'var(--medium-aqi-color)'
+			)
+		} else {
+			document.documentElement.style.setProperty(
+				'--current-aqi-color',
+				'var(--bad-aqi-color)'
+			)
+		}
+	}
+
 	async function run() {
 		const city = 'Sathon'
 		const state = 'Bangkok'
@@ -61,6 +80,8 @@
 			humidity,
 			wind
 		})
+
+		setAirQualityColor(aqi)
 	}
 	run()
 })()
