@@ -31,9 +31,26 @@
 		}
 	}
 
+	function onLoadedData() {
+		endTimeElem.innerHTML = getDuration(audioElem.duration)
+		progressBarElem.max = audioElem.duration
+	}
+
+	function onInput() {
+		audioElem.currentTime = progressBarElem.value
+	}
+
+	function onEnded() {
+		playBtnElem.className = 'play'
+		audioElem.currentTime = 0
+	}
+
 	function run() {
 		playBtnElem.addEventListener('click', onClick)
 		audioElem.addEventListener('timeupdate', onTimeUpdate)
+		audioElem.addEventListener('loadeddata', onLoadedData)
+		audioElem.addEventListener('ended', onEnded)
+		progressBarElem.addEventListener('input', onInput)
 	}
 
 	run()
