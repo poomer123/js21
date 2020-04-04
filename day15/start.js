@@ -18,6 +18,7 @@
 	function onTimeUpdate() {
 		const { currentTime } = audioElem
 		startTimeElem.innerHTML = getDuration(currentTime)
+		progressBarElem.value = currentTime
 	}
 
 	function onClick() {
