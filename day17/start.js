@@ -19,8 +19,16 @@
 		}
 	}
 
+	function onResult(event) {
+		const textElem = document.querySelector('.text')
+		const { transcript } = event.results[0][0]
+		textElem.innerText = transcript
+	}
+
 	function run() {
 		recognition.lang = 'th-TH'
+
+		recognition.addEventListener('result', onResult)
 		btnElem.addEventListener('click', onClick)
 	}
 
