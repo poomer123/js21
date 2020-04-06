@@ -22,13 +22,21 @@
 	function onResult(event) {
 		const textElem = document.querySelector('.text')
 		const { transcript } = event.results[0][0]
-		textElem.innerText = transcript
+		textElem.innerText += transcript
+	}
+
+	function onEnd() {
+		const isRecording = btnElem.classList.contains('pause')
+		if (isRecording) {
+			recognition.start()
+		}
 	}
 
 	function run() {
 		recognition.lang = 'th-TH'
 
 		recognition.addEventListener('result', onResult)
+		recognition.addEventListener('end', onEnd)
 		btnElem.addEventListener('click', onClick)
 	}
 
