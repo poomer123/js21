@@ -6,6 +6,16 @@
 		form.classList.add('invalid')
 	}
 
+	function displaySuccess() {
+		document.body.innerHTML = ''
+
+		const pElem = document.createElement('p')
+		pElem.innerText = 'You have been logged in successfully'
+		pElem.classList.add('success')
+
+		document.body.appendChild(pElem)
+	}
+
 	function validateLength(elem, min, max) {
 		const val = elem.value
 		if (val.length < min || val.length > max) {
@@ -46,6 +56,11 @@
 		validateLength(passwordElem, 8, 20)
 
 		validateEmail(emailElem)
+
+		const isValidForm = !form.classList.contains('invalid')
+		if (isValidForm) {
+			displaySuccess()
+		}
 	}
 
 	function run() {
