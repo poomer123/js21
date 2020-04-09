@@ -24,6 +24,16 @@
 		form.classList.remove('invalid')
 	}
 
+	function validateEmail(elem) {
+		// ใช้ RegX โดยเปิดและปิดบรรทัดด้วย / เพื่อบอกว่าเป็นการใช้ RegX
+		// \S+ ใช้ String มีความยาวมากกว่า 1 ตัว
+		// \. ต้องการ .
+		const regex = /\S+@\S+\.\S+/
+		if (!regex.test(elem.value)) {
+			displayError(elem, 'Email must be valid')
+		}
+	}
+
 	function validateFrom(event) {
 		event.preventDefault()
 		const emailElem = document.getElementById('email')
@@ -34,6 +44,8 @@
 
 		validateLength(emailElem, 10, 50)
 		validateLength(passwordElem, 8, 20)
+
+		validateEmail(emailElem)
 	}
 
 	function run() {
